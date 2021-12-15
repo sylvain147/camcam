@@ -14,12 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-
+    Route::get('/',[appController::class,'songs']);
     Route::get('songs',[appController::class,'songs'])->name('song');
     Route::get('songslist',[appController::class,'songslist'])->name('songlist');
     Route::get('/import',[appController::class,'import'] )->name('import');
