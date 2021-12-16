@@ -1,11 +1,5 @@
 @extends('app')
 @section('content')
-    <div class="mb-2">
-        <div class='flex cursor-pointer'>
-            <a href="{{route('song')}}" class='py-2 px-6 bg-white'>Musiques</a>
-            <a href="{{route('my-songs')}}" class='py-2 px-6 bg-white  border-b-4 border-blue-300 '>Mes musiques</a>
-        </div>
-    </div>
     <table class="w-full">
         <thead>
         <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
@@ -56,9 +50,18 @@
                 data : {
                     _token : "{{ csrf_token() }}"
                 }
-            }).then(()=>{
+            }).then((response)=>{
                 $(`.loader[data-id=${id}]`).addClass('hidden')
                 $(`.song-line[data-id=${id}]`).remove()
+                $('.song-count').html(response)
+
+                if(response < 11){
+                    $('.song-error').addClass('hidden')
+                }
+                else {
+                    $('.song-error').removeClass('hidden')
+
+                }
             })
         })
     </script>

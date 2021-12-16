@@ -67,11 +67,8 @@ class appController extends Controller
     }
 
     public function saveSong(song  $song){
-        if(Auth::user()->songs->count() > 9){
-            return 'nope';
-        }
         Auth::user()->songs()->attach($song);
-        return 'yep';
+        return  Auth::user()->songs()->count();
     }
 
     public function mySongs(){
@@ -80,6 +77,8 @@ class appController extends Controller
 
     public function removeSong(song $song) {
         Auth::user()->songs()->detach($song);
+        return  Auth::user()->songs()->count();
+
 
     }
 }

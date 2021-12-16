@@ -1,11 +1,6 @@
 @extends('app')
 @section('content')
-    <div class="mb-2">
-        <div class='flex cursor-pointer'>
-            <a href="{{route('song')}}" class='py-2 px-6 bg-white border-b-4 border-blue-300'>Musiques</a>
-            <a href="{{route('my-songs')}}" class='py-2 px-6 bg-white  '>Mes musiques</a>
-        </div>
-    </div>
+
 <div class="grid grid-cols-2 gap-2 mb-4">
     <input placeholder="Rechercher" class="search shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" >
     <select class="artist shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="" id="">
@@ -64,18 +59,16 @@
                 _token : "{{csrf_token()}}"
             }
         }).then((response)=>{
-            if(response == 'nope') {
-                setTimeout(()=>{
-                    alert('Trop de song ma gueule c\'est 10')
+            $(`.loader[data-id=${id}]`).addClass('hidden')
+            $(`.remove-song[data-id=${id}]`).removeClass('hidden')
+            $('.song-count').html(response)
 
-                    $(`.loader[data-id=${id}]`).addClass('hidden')
-                    $(`.save-song[data-id=${id}]`).removeClass('hidden')
-                },900);
+            if(response < 11){
+                $('.song-error').addClass('hidden')
             }
             else {
+                $('.song-error').removeClass('hidden')
 
-                    $(`.loader[data-id=${id}]`).addClass('hidden')
-                    $(`.remove-song[data-id=${id}]`).removeClass('hidden')
             }
 
         })
@@ -92,9 +85,18 @@
             data : {
                 _token : "{{ csrf_token() }}"
             }
-        }).then(()=>{
+        }).then((response)=>{
+            if(response < 11){
+                $('.song-error').addClass('hidden')
+            }
+            else {
+                $('.song-error').removeClass('hidden')
+
+            }
                 $(`.loader[data-id=${id}]`).addClass('hidden')
                 $(`.save-song[data-id=${id}]`).removeClass('hidden')
+            $('.song-count').html(response)
+
         })
     })
 </script>
