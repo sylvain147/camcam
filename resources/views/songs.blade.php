@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-<div class="grid grid-cols-2 gap-2 mb-4">
+    <div class="grid grid-cols-2 gap-2 mb-4">
     <input placeholder="Rechercher" class="search shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" >
     <select class="artist shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="" id="">
         <option value="">Artiste</option>

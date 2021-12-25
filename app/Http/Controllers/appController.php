@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\artist;
+use App\Models\SelectedSong;
 use App\Models\song;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,6 +39,22 @@ class appController extends Controller
             fclose($handle);
         }
         dd($request->file('file'));
+    }
+
+    public function importIds(Request $request){
+        $row = 0;
+        if (($handle = fopen($request->file('file'), "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $row++;
+                if($row == 1) continue;
+                $song = song::where('name',$data[2])->first();
+                if($song) {
+                    $song->spotify_id = $data[0];
+                    $song->save();
+                }
+            }
+            fclose($handle);
+        }
     }
 
     public function songs(){
@@ -80,5 +97,21 @@ class appController extends Controller
         return  Auth::user()->songs()->count();
 
 
+    }
+
+    public function rank(){
+        $songs = Auth::user()->selecteds;
+        return view('rank',['songs'=>$songs]);
+    }
+
+    public function saveRank(Request $request){
+        $user_id = Auth::id();
+        foreach ($request->get('songs') as $idx=>$song){
+            SelectedSong::query()
+                ->where('user_id',$user_id)
+                ->where('song_id',$song)
+                ->update(['place'=>$idx]);
+
+        }
     }
 }

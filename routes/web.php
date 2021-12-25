@@ -21,7 +21,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('songslist',[appController::class,'songslist'])->name('songlist');
     Route::get('/import',[appController::class,'import'] )->name('import');
     Route::post('/import-file',[appController::class,'importFile'] )->name('import.file');
+    Route::post('/import-ids',[appController::class,'importIds'] )->name('import.ids');
+    Route::post('/save-rank',[appController::class,'saveRank'] )->name('save.rank');
     Route::post('/save-song/{song}',[appController::class,'saveSong'])->name('save-song');
     Route::post('/remove-song/{song}',[appController::class,'removeSong'])->name('remove-song');
     Route::get('/my-songs',[appController::class,'mySongs'])->name('my-songs');
+    Route::get('/rank',[appController::class,'rank'])->name('my-rank');
 });

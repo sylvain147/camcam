@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function songs(){
         return $this->belongsToMany(song::class,'user_song','song_id','user_id');
     }
+
+    public function selecteds(){
+        return $this->belongsToMany(song::class,'selected_songs')->withPivot('place')->orderBy('place');
+    }
 }
