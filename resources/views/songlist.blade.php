@@ -7,6 +7,12 @@
         <td class="px-4 py-3 text-xs border">
             {{\Carbon\Carbon::parse($song->release_date)->format('d/m/Y')}}
         </td>
+        <td class="px-4 py-3 text-xs border">
+
+            @foreach($song->selectedBy() as $selected)
+                    {{$selected->name}}<br>
+            @endforeach
+        </td>
 
     </tr>
 

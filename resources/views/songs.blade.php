@@ -16,6 +16,7 @@
             <th class="px-4 py-3">Titre</th>
             <th class="px-4 py-3">Artiste</th>
             <th class="px-4 py-3">Date</th>
+            <th class="px-4 py-3">Sélectionnée par</th>
         </tr>
         </thead>
         <tbody class="bg-white body-songs">

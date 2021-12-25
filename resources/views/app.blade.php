@@ -19,7 +19,7 @@
 </div>
 <div class="py-5 px-5 m-8 bg-white rounded-lg shadow-md ">
     <div class="mb-2 ">
-        <div class='flex cursor-pointer'>
+        <div class='flex cursor-pointer flex-wrap'>
             <a href="{{route('song')}}" class='py-2 px-6 bg-white @if(\Illuminate\Support\Facades\Route::getCurrentRoute()->getName() == 'song') border-b-4 border-blue-300 @endif '>Musiques</a>
             <a href="{{route('my-songs')}}" class='py-2 px-6 bg-white @if(\Illuminate\Support\Facades\Route::getCurrentRoute()->getName() == 'my-songs') border-b-4 border-blue-300 @endif  '>Mes musiques</a>
             <a href="{{route('my-rank')}}" class='py-2 px-6 bg-white @if(\Illuminate\Support\Facades\Route::getCurrentRoute()->getName() == 'my-rank') border-b-4 border-blue-300 @endif  '>Mon top
