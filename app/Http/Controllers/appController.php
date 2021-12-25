@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\artist;
 use App\Models\SelectedSong;
 use App\Models\song;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,5 +114,10 @@ class appController extends Controller
                 ->update(['place'=>$idx]);
 
         }
+    }
+
+    public function selectedSongs(User $user){
+        return view('selected-songs',['user'=>$user]);
+
     }
 }

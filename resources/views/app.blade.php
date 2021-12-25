@@ -25,6 +25,11 @@
             <a href="{{route('my-rank')}}" class='py-2 px-6 bg-white @if(\Illuminate\Support\Facades\Route::getCurrentRoute()->getName() == 'my-rank') border-b-4 border-blue-300 @endif  '>Mon top
             {{\Illuminate\Support\Facades\Auth::user()->selecteds()->count()}}
             </a>
+            @foreach(\App\Models\User::all() as $user)
+                <a  class="py-2 px-6 bg-white nav-user" data-user="{{$user->id}}"  href="{{route('selected-songs',$user->id)}}">
+                    {{$user->name }}
+                </a>
+            @endforeach
         </div>
     </div>
 
