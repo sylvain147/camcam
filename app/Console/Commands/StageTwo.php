@@ -48,10 +48,13 @@ class StageTwo extends Command
                 $wrong = true;
                 $this->info('Nous avons un relou : '.$user->name.' a '.$user->songs->count().' chansons');
             }
-            else {
-                $songs = $songs->concat($user->songs);
+
+            if($user->songs->count() < 10){
+                $wrong = true;
+                $this->info(''.$user->name.' n\'a que '.$user->songs->count().' chansons');
 
             }
+                $songs = $songs->concat($user->songs);
         }
         if($wrong) {
             return ;
