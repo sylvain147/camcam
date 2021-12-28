@@ -5460,10 +5460,16 @@ window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"];
 var el = document.getElementById('rank');
 var sortable = sortablejs__WEBPACK_IMPORTED_MODULE_3__["default"].create(el, {
   handle: '.my-handle',
-  animation: 150
+  animation: 150,
+  onUpdate: function onUpdate(evt) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.song-line').each(function (idx, el) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(el).find('.song-place').html(idx + 1);
+    });
+    save();
+  }
 });
-jquery__WEBPACK_IMPORTED_MODULE_0___default()('.save').on('click', function () {
-  console.log('ici');
+
+function save() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
     url: '/save-rank',
     method: 'POST',
@@ -5475,7 +5481,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()('.save').on('click', function () {
     var notyf = new notyf__WEBPACK_IMPORTED_MODULE_1__.Notyf();
     notyf.success('Changements sauvegardés!');
   });
-});
+}
+
 alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"].start();
 
 /***/ }),
