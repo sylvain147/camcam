@@ -102,7 +102,7 @@ class appController extends Controller
 
     public function rank(){
         $songs = Auth::user()->selecteds;
-        return view('rank2',['songs'=>$songs]);
+        return view('rank',['songs'=>$songs]);
     }
 
     public function rank2(){
