@@ -10,10 +10,6 @@
                 <th class="px-4 py-3">{{$user->name}}</th>
 
             @endforeach
-            @foreach($users as $user)
-                <th class="px-4 py-3">{{$user->name}}</th>
-
-            @endforeach
         </tr>
         </thead>
         <tbody class="bg-white body-songs">
@@ -29,9 +25,7 @@
                 @foreach($users as $user)
                     <td class="px-4 py-3 text-xs border text-center  @if($user->getRank($song->id) <4) bg-green-200 @endif @if($user->getRank($song->id) >10) bg-red-500 @endif  @if($user->getRank($song->id) >3 && $user->getRank($song->id) < 11 ) bg-yellow-500 @endif" >{{$user->getRank($song->id)}}</td>
 
-                @endforeach  @foreach($users as $user)
-                    <td class="px-4 py-3 text-xs border text-center  @if($user->getRank($song->id) <4) bg-green-200 @endif @if($user->getRank($song->id) >10) bg-red-500 @endif  @if($user->getRank($song->id) >3 && $user->getRank($song->id) < 11 ) bg-yellow-500 @endif" >{{$user->getRank($song->id)}}</td>
-
+   
                 @endforeach
 
             </tr>

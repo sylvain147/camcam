@@ -159,6 +159,9 @@ class appController extends Controller
     }
 
     public function finalRank(){
+        if(!song::where('points','>',0)->exists()){
+            abort(404);
+        }
         return view('final-rank',[
             'users'=>User::all(),
             'songs'=>song::orderBy('points','DESC')->where('selected',1)->get()
