@@ -29,4 +29,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/my-songs',[appController::class,'mySongs'])->name('my-songs');
     Route::get('/rank',[appController::class,'rank'])->name('my-rank');
     Route::get('/rank2',[appController::class,'rank2'])->name('my-rank2');
+    Route::get('/final',[appController::class,'final'])->name('final');
+    Route::get('/next',[appController::class,'next'])->name('find-next');
+    Route::get('/final-rank',[appController::class,'finalRank'])->name('final-rank');
+    Route::post('/calculate-final',[appController::class,'calculateFinal'])->name('calculate-final');
 });

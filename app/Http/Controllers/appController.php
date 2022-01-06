@@ -8,6 +8,7 @@ use App\Models\song;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class appController extends Controller
@@ -124,5 +125,43 @@ class appController extends Controller
     public function selectedSongs(User $user){
         return view('selected-songs',['user'=>$user]);
 
+    }
+
+    public function final(Request $request){
+
+        return view('final',['token'=>$request->get('token')]);
+    }
+
+    public function calculateFinal(){
+        song::query()->update([
+            'points'=>0
+        ]);
+        foreach (SelectedSong::all() as $s){
+            $song = song::find($s->song_id);
+                $song->points += (44 - $s->place);
+                $song->save();
+        }
+        return song::query()->orderBy('points','DESC')->get()[10]->points;
+    }
+
+    public function next(Request $request){
+        $song = new Collection();
+        $points = $request->get('points')+1;
+        if(!song::where('points','>=',$points)->exists()){
+            return 'over';
+        }
+
+        while($song->count() == 0){
+            $song = song::where('points',$points)->with('artist')->get();
+            $points ++;
+        }
+        return response()->json(['songs'=>$song]);
+    }
+
+    public function finalRank(){
+        return view('final-rank',[
+            'users'=>User::all(),
+            'songs'=>song::orderBy('points','DESC')->where('selected',1)->get()
+        ]);
     }
 }

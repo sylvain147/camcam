@@ -66,4 +66,8 @@ class User extends Authenticatable
     public function selecteds(){
         return $this->belongsToMany(song::class,'selected_songs')->withPivot('place')->orderBy('place');
     }
+
+    public function getRank($song){
+        return $this->selecteds->find($song) ? $this->selecteds->find($song)->pivot->place : 0;
+    }
 }
